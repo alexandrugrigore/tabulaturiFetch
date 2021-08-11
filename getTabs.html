@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <script>
+		
+		function createElementFromHTML(htmlString) {
+		  var div = document.createElement('div');
+		  div.innerHTML = htmlString.trim();
+
+		  // Change this to div.childNodes to support multiple top-level nodes
+		  return div.firstChild; 
+		}
+
+		const links = [
+		"https://www.tabulaturi.ro/acorduri/phoenix/mugur-de-fluier-455",
+		"https://www.tabulaturi.ro/acorduri/vita-de-vie/praf-de-stele-2757",
+		"https://www.tabulaturi.ro/acorduri/vita-de-vie/praf-de-stele-3342",
+		"https://www.tabulaturi.ro/acorduri/cargo/daca-ploaia-s-ar-opri-316",
+		"https://www.tabulaturi.ro/acorduri/omul-cu-sobolani/doua-beri-goale-3431",
+		"https://www.tabulaturi.ro/acorduri/ursul-trubadur/viata-de-vagabond-4049",
+		"https://www.tabulaturi.ro/acorduri/mihai-margineanu/a-fost-odata-419",
+		"https://www.tabulaturi.ro/acorduri/vama-veche/hotel-cismigiu-522",
+		"https://www.tabulaturi.ro/acorduri/maria-tanase/aseara-ti-am-luat-basma-418",
+		"https://www.tabulaturi.ro/acorduri/karma/copilita-fara-minte-1441",
+		"https://www.tabulaturi.ro/acorduri/cargo/aproape-de-voi-574",
+		"https://www.tabulaturi.ro/acorduri/phoenix/andrii-popa-449",
+		"https://www.tabulaturi.ro/acorduri/bucovina/straja-7785",
+		"https://www.tabulaturi.ro/acorduri/bosquito/pepita-313",
+		"https://www.tabulaturi.ro/acorduri/bosquito/bosquito-309",
+		"https://www.tabulaturi.ro/acorduri/alternosfera/flori-de-mai-4498",
+		"https://www.tabulaturi.ro/acorduri/vama/perfect-9146",
+		"https://www.tabulaturi.ro/acorduri/vama-veche/vara-asta-8713",
+		"https://www.tabulaturi.ro/acorduri/anonim/apa-de-izvor-594",
+		"https://www.tabulaturi.ro/acorduri/folclor/trandafir-de-la-moldova-333",
+		"https://www.tabulaturi.ro/acorduri/gheorghe-gheorghiu/unde-dragoste-nu-e-341",
+		"https://www.tabulaturi.ro/acorduri/vama-veche/18-ani-3643",
+		"https://www.tabulaturi.ro/acorduri/o-zone/despre-tine-593",
+		"https://www.tabulaturi.ro/acorduri/o-zone/dragostea-din-tei-592",
+		"https://www.tabulaturi.ro/acorduri/bambi/doi-ochi-caprui-294",
+		"https://www.tabulaturi.ro/acorduri/vama-veche/vama-veche-3573",
+		"https://www.tabulaturi.ro/acorduri/holograf/sa-nu-mi-iei-niciodata-dragostea-3773",
+		];
+		
+		links.forEach(element =>
+			fetch(element)
+			  .then(res => res.text())
+			  .then(html => {
+				const parser = new DOMParser();
+				const htmlDoc = parser.parseFromString(html, "text/html");
+				
+				var titleText = htmlDoc.querySelector('div.card-header.card-tab').innerText;
+				var text = htmlDoc.querySelector('pre.tab-text').innerText;
+				
+				const all = document.getElementById("all");
+				
+				var title = document.createElement('span');
+				title.style.fontSize = "20px";
+				title.appendChild(document.createTextNode(titleText));
+				
+				all.appendChild(title);
+				all.appendChild(document.createElement("br"));
+				all.appendChild(document.createTextNode(text));
+				all.appendChild(createElementFromHTML("<p style='page-break-after: always;'>&nbsp;</p>"));
+				all.appendChild(createElementFromHTML("<p style='page-break-before: always;'>&nbsp;</p>"));
+				
+				
+			  })
+		  )
+
+			
+			
+		</script>
+    </head>
+	 
+	 <body>
+		<pre id = "all"><pre>
+	 </body>
+</html>
